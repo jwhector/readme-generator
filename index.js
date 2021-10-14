@@ -49,18 +49,21 @@ const questions = async () => {
             type: 'list',
             name: 'license',
             message: 'Please select a license.',
-            choices: ['MIT']
+            choices: ['MIT License', 'Mozilla Public License 2.0', 'Apache License 2.0', 'None']
         },
     ]);
 }
 
 // TODO: Create a function to write README file
-// function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+    fs.writeFileSync(fileName, data);
+}
 
 // TODO: Create a function to initialize app
 async function init() {
     const response = await questions();
-    require('./utils/generateMarkdown')(response);
+    const readme = require('./utils/generateMarkdown')(response);
+    writeToFile('README-test.md', readme);
 }
 
 // Function call to initialize app
